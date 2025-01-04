@@ -24,3 +24,4 @@ schema:
   grocy_url: str
 ports:
   5080/tcp: 5080
+  8099/tcp: 8099
