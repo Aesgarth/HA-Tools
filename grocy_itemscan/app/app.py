@@ -8,9 +8,18 @@ app = Flask(__name__, template_folder="/app/templates")
 GROCY_API_KEY = os.getenv("GROCY_API_KEY", "default_api_key")
 GROCY_URL = os.getenv("GROCY_URL", "http://your-default-grocy-instance")
 
+
+@app.before_request
+def remove_ingress_prefix():
+    """Strip /api/hassio_ingress prefix for Ingress requests."""
+    if request.path.startswith("/api/hassio_ingress"):
+        request.environ['PATH_INFO'] = request.path[len("/api/hassio_ingress"):]
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/scan", methods=["POST"])
 def scan_barcode():
@@ -27,7 +36,7 @@ def scan_barcode():
         product_name = product_data.get("product", {}).get("product_name", "Unknown Product")
 
         # Add product to Grocy (optional logic)
-        # ...
+        add_to_grocy(product_name, barcode)
 
         return jsonify({"message": "Product added", "product_name": product_name})
 
@@ -37,8 +46,6 @@ def scan_barcode():
     except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8099)
 
 def add_to_grocy(name, barcode):
     headers = {"GROCY-API-KEY": GROCY_API_KEY, "Content-Type": "application/json"}
@@ -47,6 +54,6 @@ def add_to_grocy(name, barcode):
     if response.status_code != 200:
         print(f"Failed to add product to Grocy: {response.content}")
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8099)
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80
