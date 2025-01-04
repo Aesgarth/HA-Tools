@@ -40,6 +40,7 @@
         // Initialize the barcode reader
         codeReader.decodeFromVideoDevice(null, videoElement, (result, err) => {
             if (result) {
+                console.log(`Scanned Barcode: ${result.text}`); // Add this for debugging
                 // Clear any previous error messages
                 errorMessage.style.display = 'none';
 
