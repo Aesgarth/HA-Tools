@@ -8,6 +8,10 @@ app = Flask(__name__, template_folder="/app/templates")
 GROCY_API_KEY = os.getenv("GROCY_API_KEY", "default_api_key")
 GROCY_URL = os.getenv("GROCY_URL", "http://your-default-grocy-instance")
 
+@app.before_first_request
+def log_configuration():
+    print(f"API Key: {GROCY_API_KEY}")
+    print(f"Grocy URL: {GROCY_URL}")
 
 @app.before_request
 def remove_ingress_prefix():
