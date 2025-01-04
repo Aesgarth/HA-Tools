@@ -7,6 +7,8 @@
   "startup": "services",
   "init": "false",
   "boot": "auto",
+  "panel_title": "Grocy Scanner",
+  "panel_icon": "mdi:barcode-scan"
   "ingress": true,
   "ingress_port": 8099,
   "ingress_entry": "/"
