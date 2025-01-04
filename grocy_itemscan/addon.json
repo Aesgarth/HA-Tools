@@ -5,12 +5,10 @@
   "description": "An add-on for scanning items into Grocy, integrated with Home Assistant.",
   "arch": ["aarch64", "amd64", "armv7", "armhf", "i386"],
   "startup": "services",
-  "init": "false",
+  "init": false,
   "boot": "auto",
-  "panel_title": "Grocy Scanner",
-  "panel_icon": "mdi:barcode-scan",
-  "ingress": true
-  "ingress_port": 8099
+  "ingress": true,
+  "ingress_port": 8099,
   "ingress_entry": "/",
   "options": {
     "api_key": "YOUR_API_KEY",
@@ -21,12 +19,10 @@
     "grocy_url": "str"
   },
   "environment": {
-    "GROCY_API_KEY": "options['api_key']",
-    "GROCY_URL": "options['grocy_url']"
+    "GROCY_API_KEY": "{{ options.api_key }}",
+    "GROCY_URL": "{{ options.grocy_url }}"
   },
   "ports": {
-    "5080/tcp": 5080
     "8099/tcp": 8099
   }
-  
 }
