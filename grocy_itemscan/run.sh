@@ -12,5 +12,5 @@ bashio::log.info "Using API Key: ${API_KEY}"
 bashio::log.info "Grocy URL: ${GROCY_URL}"
 
 # Start the service (replace this with your application logic)
-bashio::log.info "Running service..."
-exec python3 -m http.server 5000
+bashio::log.info "Starting HTTP server on port 5080..."
+python3 -m http.server 5080 
