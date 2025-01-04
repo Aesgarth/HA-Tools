@@ -9,9 +9,9 @@
   "boot": "auto",
   "panel_title": "Grocy Scanner",
   "panel_icon": "mdi:barcode-scan",
-  "ingress": true,
-  "ingress_port": 8099,
-  "ingress_entry": "/"
+  "ingress": true
+  "ingress_port": 8099
+  "ingress_entry": "/",
   "options": {
     "api_key": "YOUR_API_KEY",
     "grocy_url": "http://your-grocy-instance"
