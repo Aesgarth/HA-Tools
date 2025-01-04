@@ -19,8 +19,11 @@ def log_requests():
 # Remove Ingress Prefix
 @app.before_request
 def remove_ingress_prefix():
+    print(f"Original Request Path: {request.path}")
     if request.path.startswith("/api/hassio_ingress"):
+        # Strip ingress prefix
         request.environ['PATH_INFO'] = request.path[len("/api/hassio_ingress"):]
+        print(f"Modified Request Path: {request.environ['PATH_INFO']}")
 
 # Home Page
 @app.route("/")
@@ -29,7 +32,9 @@ def index():
 
 # Scan Barcode Endpoint
 @app.route("/scan", methods=["POST"])
+@app.route("/scan/", methods=["POST"])
 def scan_barcode():
+    return jsonify({"message": "Scan endpoint is reachable!"})
     # Ensure Content-Type is JSON
     if not request.is_json:
         return jsonify({"error": "Invalid Content-Type. Expected application/json."}), 415
