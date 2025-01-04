@@ -7,12 +7,8 @@ WORKDIR /app
 # Install Python and required libraries
 RUN apk add --no-cache python3 py3-pip && pip3 install flask requests
 
-# Copy application script
-COPY app /app/app
-
-# Copy templates and static files
-COPY templates /app/templates
-COPY static /app/static
+# Copy the entire app folder into the container
+COPY app /app
 
 # Set up S6 service for the Flask app
 RUN mkdir -p /etc/services.d/grocy-itemscanner
