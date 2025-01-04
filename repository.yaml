@@ -1,0 +1,9 @@
+name: HA Tools
+description: A collection of custom add-ons for Home Assistant.
+url: https://github.com/Aesgarth/HA-Tools
+add-ons:
+  - slug: grocy_itemscan
+    name: Grocy Item Scanner
+    description: An add-on for scanning items into Grocy, integrated with Home Assistant.
+    version: 1.0.0
+    url: https://github.com/Aesgarth/HA-Tools/tree/main/grocy_itemscan
