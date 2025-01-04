@@ -21,12 +21,17 @@
             border-radius: 8px;
             margin-top: 1em;
         }
+        #error-message {
+            color: red;
+            margin-top: 1em;
+        }
     </style>
 </head>
 <body>
     <h1>Grocy Item Scanner</h1>
     <video id="preview"></video>
-    <p id="error-message" style="color: red; display: none;"></p>
+    <p id="error-message" style="display: none;"></p>
+
     <script>
         const codeReader = new ZXing.BrowserBarcodeReader();
         const videoElement = document.getElementById('preview');
@@ -37,7 +42,7 @@
             if (result) {
                 // When a barcode is successfully scanned
                 alert(`Scanned Barcode: ${result.text}`);
-                fetch('/scan', {
+                fetch('/api/hassio_ingress/scan', { // Ensure the correct endpoint
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ barcode: result.text })
