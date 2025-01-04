@@ -45,7 +45,7 @@
                 errorMessage.style.display = 'none';
 
                 // Send the scanned barcode to the server
-                fetch('/api/hassio_ingress/scan', {
+                fetch('/api/hassio_ingress/scan/', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ barcode: result.text })
