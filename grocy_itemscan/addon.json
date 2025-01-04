@@ -20,6 +20,10 @@
     "api_key": "str",
     "grocy_url": "str"
   },
+  "environment": {
+    "GROCY_API_KEY": "options['api_key']",
+    "GROCY_URL": "options['grocy_url']"
+  },
   "ports": {
     "5080/tcp": 5080
     "8099/tcp": 8099
