@@ -32,6 +32,7 @@ def index():
 
 # Scan Barcode Endpoint
 @app.route("/scan", methods=["POST"])
+@app.route("/scan/", methods=["POST"])
 def scan_barcode():
     return jsonify({"message": "Scan endpoint is reachable!"})
     # Ensure Content-Type is JSON
