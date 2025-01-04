@@ -8,37 +8,36 @@ app = Flask(__name__, template_folder="/app/templates")
 GROCY_API_KEY = os.getenv("GROCY_API_KEY", "default_api_key")
 GROCY_URL = os.getenv("GROCY_URL", "http://your-default-grocy-instance")
 
-# Log the configuration once on the first request
-first_request_logged = False
-
-@app.before_request
-def log_configuration():
-    global first_request_logged
-    if not first_request_logged:
-        print(f"API Key: {GROCY_API_KEY}")
-        print(f"Grocy URL: {GROCY_URL}")
-        first_request_logged = True
+# Log environment variables
 @app.before_request
 def log_requests():
     print(f"Request Path: {request.path}")
     print(f"Request Method: {request.method}")
-    print(f"Request Body: {request.json if request.json else 'No Body'}")
+    print(f"Headers: {request.headers}")
+    print(f"Body: {request.data}")
 
-
+# Remove Ingress Prefix
 @app.before_request
 def remove_ingress_prefix():
-    """Strip /api/hassio_ingress prefix for Ingress requests."""
     if request.path.startswith("/api/hassio_ingress"):
         request.environ['PATH_INFO'] = request.path[len("/api/hassio_ingress"):]
 
+# Home Page
 @app.route("/")
 def index():
     return render_template("index.html")
 
+# Scan Barcode Endpoint
 @app.route("/scan", methods=["POST"])
 def scan_barcode():
+    # Ensure Content-Type is JSON
+    if not request.is_json:
+        return jsonify({"error": "Invalid Content-Type. Expected application/json."}), 415
+
     try:
-        barcode = request.json.get("barcode")
+        # Extract barcode from JSON payload
+        data = request.get_json()
+        barcode = data.get("barcode")
         if not barcode:
             return jsonify({"error": "No barcode provided"}), 400
 
@@ -60,12 +59,17 @@ def scan_barcode():
     except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
+# Add Product to Grocy
 def add_to_grocy(name, barcode):
-    headers = {"GROCY-API-KEY": GROCY_API_KEY, "Content-Type": "application/json"}
-    data = {"name": name, "barcodes": [{"barcode": barcode}]}
-    response = requests.post(f"{GROCY_URL}/api/objects/products", json=data, headers=headers)
-    if response.status_code != 200:
-        print(f"Failed to add product to Grocy: {response.content}")
+    try:
+        headers = {"GROCY-API-KEY": GROCY_API_KEY, "Content-Type": "application/json"}
+        data = {"name": name, "barcodes": [{"barcode": barcode}]}
+        response = requests.post(f"{GROCY_URL}/api/objects/products", json=data, headers=headers)
+        if response.status_code != 200:
+            print(f"Failed to add product to Grocy: {response.content}")
+    except Exception as e:
+        print(f"Error adding to Grocy: {str(e)}")
 
+# Start the Flask App
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8099)
