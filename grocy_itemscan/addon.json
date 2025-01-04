@@ -5,6 +5,7 @@
   "description": "An add-on for scanning items into Grocy, integrated with Home Assistant.",
   "arch": ["aarch64", "amd64", "armv7", "armhf", "i386"],
   "startup": "services",
+  "init": "false",
   "boot": "auto",
   "options": {
     "api_key": "YOUR_API_KEY",
