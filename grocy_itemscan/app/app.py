@@ -38,4 +38,5 @@ def add_to_grocy(name, barcode):
         print(f"Failed to add product to Grocy: {response.content}")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5080)
+    app.run(host="0.0.0.0", port=8099)
+
