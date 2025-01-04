@@ -18,6 +18,12 @@ def log_configuration():
         print(f"API Key: {GROCY_API_KEY}")
         print(f"Grocy URL: {GROCY_URL}")
         first_request_logged = True
+@app.before_request
+def log_requests():
+    print(f"Request Path: {request.path}")
+    print(f"Request Method: {request.method}")
+    print(f"Request Body: {request.json if request.json else 'No Body'}")
+
 
 @app.before_request
 def remove_ingress_prefix():
