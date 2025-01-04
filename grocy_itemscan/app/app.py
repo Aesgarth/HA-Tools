@@ -19,11 +19,11 @@ def log_requests():
 # Remove Ingress Prefix
 @app.before_request
 def remove_ingress_prefix():
-    print(f"Original Request Path: {request.path}")
+    """Strip /api/hassio_ingress prefix for Ingress requests."""
     if request.path.startswith("/api/hassio_ingress"):
-        # Strip ingress prefix
+        original_path = request.path
         request.environ['PATH_INFO'] = request.path[len("/api/hassio_ingress"):]
-        print(f"Modified Request Path: {request.environ['PATH_INFO']}")
+        print(f"Original Path: {original_path}, Modified Path: {request.environ['PATH_INFO']}")
 
 # Home Page
 @app.route("/")
