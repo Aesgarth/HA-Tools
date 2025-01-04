@@ -9,6 +9,7 @@ arch:
   - armhf
   - i386
 startup: services
+init: false
 boot: auto
 options:
   api_key: "YOUR_API_KEY"
