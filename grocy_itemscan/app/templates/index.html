@@ -43,9 +43,6 @@
                 // Clear any previous error messages
                 errorMessage.style.display = 'none';
 
-                // Display the scanned barcode
-                alert(`Scanned Barcode: ${result.text}`);
-
                 // Send the scanned barcode to the server
                 fetch('/api/hassio_ingress/scan', {
                     method: 'POST',
@@ -54,26 +51,21 @@
                 })
                 .then(response => {
                     if (!response.ok) {
-                        // Handle non-OK HTTP responses
                         return response.text().then(errText => {
                             throw new Error(`Server error: ${errText}`);
                         });
                     }
-                    // Parse and return the JSON response
                     return response.json();
                 })
                 .then(data => {
-                    // Display a success message with the product name
                     alert(`Product added: ${data.product_name}`);
                 })
                 .catch(error => {
-                    // Display error messages
                     errorMessage.textContent = `Error: ${error.message}`;
                     errorMessage.style.display = 'block';
                 });
             }
 
-            // Handle errors during scanning
             if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err);
                 errorMessage.textContent = `Camera Error: ${err.message}`;
