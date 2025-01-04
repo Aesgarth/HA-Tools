@@ -17,4 +17,4 @@ schema:
   api_key: str
   grocy_url: str
 ports:
-  5000/tcp: 5000
+  5080/tcp: 5080
