@@ -5,24 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grocy Item Scanner</title>
     <script src="https://unpkg.com/@zxing/library@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 1em;
+        }
+    </style>
 </head>
 <body>
     <h1>Grocy Item Scanner</h1>
-    <video id="preview" style="width: 100%;"></video>
+    <video id="preview"></video>
+    <p id="error-message" style="color: red; display: none;"></p>
     <script>
         const codeReader = new ZXing.BrowserBarcodeReader();
         const videoElement = document.getElementById('preview');
+        const errorMessage = document.getElementById('error-message');
 
+        // Initialize the barcode reader
         codeReader.decodeFromVideoDevice(null, videoElement, (result, err) => {
             if (result) {
+                // When a barcode is successfully scanned
+                alert(`Scanned Barcode: ${result.text}`);
                 fetch('/scan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ barcode: result.text })
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(errText => {
+                            throw new Error(`Server error: ${errText}`);
+                        });
+                    }
+                    return response.json();
+                })
                 .then(data => alert(`Product added: ${data.product_name}`))
-                .catch(error => alert('Error: ' + error));
+                .catch(error => {
+                    errorMessage.textContent = `Error: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                });
+            }
+
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err);
+                errorMessage.textContent = `Camera Error: ${err.message}`;
+                errorMessage.style.display = 'block';
             }
         });
     </script>
