@@ -1,6 +1,6 @@
 # Hello World Addon
 
-A simple Home Assistant addon that says "Hello World" using Ingress.
+Runs a ping and a speed test
 
 ## Features
 - Displays a "Hello World" page.
