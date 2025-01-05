@@ -10,7 +10,7 @@ arch:
 startup: application
 ingress: true
 panel_icon: mdi:barcode-scan
-webui: "http://[HOST]:[PORT]"
+webui: "http://[HOST]:[PORT]/"
 ports:
   8099/tcp: 8099
 schema:
