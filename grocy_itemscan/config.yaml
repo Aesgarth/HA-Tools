@@ -13,6 +13,10 @@ panel_icon: mdi:barcode-scan
 webui: http://[HOST]:[PORT:8099]/dashboard
 ports:
   8099/tcp: 8099
+options:
+  grocy_api_key: ""
+  grocy_url: ""
+  external_api_key: ""
 schema:
   grocy_api_key:
     type: str
@@ -24,7 +28,4 @@ schema:
     type: str
     description: "Optional API key"
     required: false
-options:
-  grocy_api_key: ""
-  grocy_url: ""
-  external_api_key: ""
+
