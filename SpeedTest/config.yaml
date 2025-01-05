@@ -1,6 +1,6 @@
 name: "SpeedTest"
 version: "1.0.0"
-slug: "SpeedTest"
+slug: "speedtest"
 description: "Checks internet connectivity and speed."
 arch:
   - "armv7"
