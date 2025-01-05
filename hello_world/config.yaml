@@ -1,0 +1,16 @@
+name: "Hello World Addon"
+version: "1.0.0"
+slug: "hello_world"
+description: "A simple addon that prints 'Hello World'."
+arch:
+  - "armv7"
+  - "armhf"
+  - "aarch64"
+  - "amd64"
+  - "i386"
+startup: "application"
+boot: "auto"
+ingress: true
+host_network: false
+options: {}
+schema: {}
