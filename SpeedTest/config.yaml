@@ -16,6 +16,6 @@ options:
   speedtest_interval: 30  # Default: Run speed test every 30 minutes
   host: "8.8.8.8"  # Default: Google DNS for connectivity check
 schema:
-  ping_interval: int(min=1)
-  speedtest_interval: int(min=5)
+  ping_interval: int
+  speedtest_interval: int
   host: str
