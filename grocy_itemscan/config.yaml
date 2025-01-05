@@ -7,26 +7,23 @@ arch:
   - amd64
   - armv7
   - i386
-  - x86_64
 startup: application
 ingress: true
-ingress_port: 8099
 panel_icon: mdi:barcode-scan
-panel_title: Grocy Scanner
-webui: "http://[PROTO:tcp]://[HOST]:[PORT]"
+webui: "http://[HOST]:[PORT]"
 ports:
   8099/tcp: 8099
 schema:
   grocy_api_key:
-    type: string
-    description: Your Grocy API Key
+    type: str
+    description: Grocy API Key
   grocy_url:
-    type: string
-    description: Your Grocy URL
+    type: url
+    description: Grocy URL
   external_api_key:
-    type: string
+    type: str
+    description: External API Key
     required: false
-    description: Optional API key for external product database
 options:
   grocy_api_key: ""
   grocy_url: ""
