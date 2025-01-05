@@ -16,13 +16,13 @@ ports:
 schema:
   grocy_api_key:
     type: str
-    description: API key for Grocy
+    description: "API key for Grocy"
   grocy_url:
     type: url
-    description: Grocy URL
+    description: "Grocy URL"
   external_api_key:
     type: str
-    description: Optional API key
+    description: "Optional API key"
     required: false
 options:
   grocy_api_key: ""
