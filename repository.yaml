@@ -7,3 +7,8 @@ add-ons:
     description: An add-on for scanning items into Grocy, integrated with Home Assistant.
     version: 1.0.0
     url: https://github.com/Aesgarth/HA-Tools/tree/main/grocy_itemscan
+  - slug: hello_world
+    name: Hello world template app
+    description: An add-on that does very little
+    version: 0.0.1
+    url: https://github.com/Aesgarth/HA-Tools/tree/main/hello_world
