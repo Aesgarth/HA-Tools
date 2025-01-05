@@ -96,3 +96,4 @@ while True:
         last_speedtest_time = current_time
 
     time.sleep(1)
+	

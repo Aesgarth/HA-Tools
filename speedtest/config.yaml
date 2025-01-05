@@ -11,7 +11,7 @@ arch:
 startup: "application"
 boot: "auto"
 ingress: true
-ingress-port:3457
+ingress-port: 3457
 options:
   ping_interval: 5  # Default: Check connectivity every 5 minutes
   speedtest_interval: 30  # Default: Run speed test every 30 minutes
