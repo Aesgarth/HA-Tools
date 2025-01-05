@@ -10,9 +10,10 @@ arch:
 startup: application
 ingress: true
 panel_icon: mdi:barcode-scan
-webui: http://[HOST]:[PORT:8199]/dashboard
+webui: http://[HOST]:[PORT:8198]/dashboard
 ports:
   8199/tcp: 8199
+  8198/tcp: 8198
 options:
   grocy_api_key: ""
   grocy_url: ""
