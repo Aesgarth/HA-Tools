@@ -1,18 +1,25 @@
 FROM python:3.11-slim
 
-# Install necessary tools
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    iputils-ping \
-    speedtest-cli \
- && rm -rf /var/lib/apt/lists/*
+       iputils-ping \
+   && rm -rf /var/lib/apt/lists/*
 
-# Copy the scripts
+# Install Python libraries
+RUN pip install --no-cache-dir paho-mqtt flask
+
+# Copy the scripts and web interface files
 WORKDIR /app
 COPY run.sh /app/run.sh
 COPY speedtest.py /app/speedtest.py
+COPY webserver.py /app/webserver.py
+COPY templates /app/templates
 
 # Ensure scripts are executable
-RUN chmod +x /app/run.sh /app/speedtest.py
+RUN chmod +x /app/run.sh /app/speedtest.py /app/webserver.py
+
+# Expose the web server port
+EXPOSE 3456
 
 # Start the addon
 CMD ["/app/run.sh"]

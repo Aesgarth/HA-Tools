@@ -3,9 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>SpeedTest Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        .result {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
-<body style="text-align: center; margin-top: 50px;">
-    <h1>Hello, World!</h1>
+<body>
+    <div class="container">
+        <h1>SpeedTest Results</h1>
+        <div class="result">
+            <strong>Internet Status:</strong> {{ results["internet_status"] }}
+        </div>
+        <div class="result">
+            <strong>Last Ping Time:</strong> {{ results["last_ping_time"] }}
+        </div>
+        <div class="result">
+            <strong>Download Speed:</strong> {{ results["download_speed"] }}
+        </div>
+        <div class="result">
+            <strong>Upload Speed:</strong> {{ results["upload_speed"] }}
+        </div>
+    </div>
 </body>
 </html>
