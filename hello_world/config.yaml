@@ -1,6 +1,7 @@
 name: "Hello World Addon"
 version: "1.0.0"
 slug: "hello_world"
+panel_icon: "mdi:earth" 
 description: "A simple addon that prints 'Hello World'."
 arch:
   - "armv7"
