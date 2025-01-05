@@ -1,8 +1,7 @@
-name: "Hello World Addon"
+name: "SpeedTest"
 version: "1.0.0"
-slug: "hello_world"
-panel_icon: "mdi:earth" 
-description: "A simple addon that prints 'Hello World'."
+slug: "SpeedTest"
+description: "Checks internet connectivity and speed."
 arch:
   - "armv7"
   - "armhf"
@@ -11,8 +10,12 @@ arch:
   - "i386"
 startup: "application"
 boot: "auto"
-ingress: true
-ingress_port: 3456
-host_network: false
-options: {}
-schema: {}
+ingress: false
+options:
+  ping_interval: 5  # Default: Check connectivity every 5 minutes
+  speedtest_interval: 30  # Default: Run speed test every 30 minutes
+  host: "8.8.8.8"  # Default: Google DNS for connectivity check
+schema:
+  ping_interval: int(min=1)
+  speedtest_interval: int(min=5)
+  host: str

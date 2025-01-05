@@ -1,21 +1,18 @@
 FROM python:3.11-slim
 
-# Install necessary dependencies
+# Install necessary tools
 RUN apt-get update && apt-get install -y \
-    nginx \
+    iputils-ping \
+    speedtest-cli \
  && rm -rf /var/lib/apt/lists/*
 
-# Create a directory for the addon
+# Copy the scripts
 WORKDIR /app
+COPY run.sh /app/run.sh
+COPY speedtest.py /app/speedtest.py
 
-# Copy the static "Hello World" web page
-COPY www /app/www
+# Ensure scripts are executable
+RUN chmod +x /app/run.sh /app/speedtest.py
 
-# Copy the nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose the ingress port
-EXPOSE 3456
-
-# Start nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Start the addon
+CMD ["/app/run.sh"]
