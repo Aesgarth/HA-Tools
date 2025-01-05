@@ -10,19 +10,19 @@ arch:
 startup: application
 ingress: true
 panel_icon: mdi:barcode-scan
-webui: "http://[HOST]:[PORT]"
+webui: "[PROTO:http]://[HOST]:[PORT]"
 ports:
   8099/tcp: 8099
 schema:
   grocy_api_key:
     type: str
-    description: Grocy API Key
+    description: API key
   grocy_url:
     type: url
-    description: Grocy URL
+    description: URL
   external_api_key:
     type: str
-    description: External API Key
+    description: API key
     required: false
 options:
   grocy_api_key: ""
