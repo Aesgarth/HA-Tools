@@ -18,14 +18,6 @@ options:
   grocy_url: ""
   external_api_key: ""
 schema:
-  grocy_api_key:
-    type: str
-    description: "API key for Grocy"
-  grocy_url:
-    type: url
-    description: "Grocy URL"
-  external_api_key:
-    type: str
-    description: "Optional API key"
-    required: false
-
+  grocy_api_key: str
+  grocy_url: url
+  external_api_key: str
