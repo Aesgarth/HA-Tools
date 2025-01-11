@@ -19,7 +19,7 @@ COPY templates /app/templates
 RUN chmod +x /app/run.sh /app/speedtest.py /app/webserver.py
 
 # Expose the web server port
-EXPOSE 3456
+EXPOSE 3457
 
 # Start the addon
 CMD ["/app/run.sh"]
