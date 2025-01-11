@@ -13,7 +13,6 @@ COPY web_ui/ /app/web_ui/
 COPY run.sh /app/
 
 # Expose the port and set permissions
-EXPOSE 8199
 EXPOSE 8198
 RUN chmod +x /app/run.sh
 

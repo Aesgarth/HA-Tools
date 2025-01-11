@@ -9,6 +9,7 @@ arch:
   - i386
 startup: application
 ingress: true
+ingress_port: 8198
 panel_icon: mdi:barcode-scan
 webui: "http://[HOST]:[PORT:8198]"
 ports:
