@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y \
 
 # Add your code
 WORKDIR /app
-COPY api/ /app/api/
-COPY web_ui/ /app/web_ui/
-COPY run.sh /app/
+COPY /api/ /app/api/
+COPY /web_ui/ /app/web_ui/
+COPY /run.sh /app/
 
 # Expose the port and set permissions
 EXPOSE 8198
