@@ -1,7 +1,7 @@
-name: "SpeedTest"
-version: "1.0.0"
+name: "SpeedTest Monitor"
+version: "1.1.0" # Updated version
 slug: "speedtest"
-description: "Checks internet connectivity and speed."
+description: "Periodically checks internet connectivity and speed, publishing results via MQTT and displaying them in a web UI."
 arch:
   - "armv7"
   - "armhf"
@@ -11,12 +11,25 @@ arch:
 startup: "application"
 boot: "auto"
 ingress: true
-ingress-port: 3457
+ingress_port: 3457 # Corrected key
+panel_icon: "mdi:speedometer"
+map:
+  - "data" # Make /data directory available to the addon
 options:
-  ping_interval: 5  # Default: Check connectivity every 5 minutes
-  speedtest_interval: 30  # Default: Run speed test every 30 minutes
-  host: "8.8.8.8"  # Default: Google DNS for connectivity check
+  ping_interval: 5
+  speedtest_interval: 30
+  host: "8.8.8.8"
+  mqtt_host: "core-mosquitto" # Example default, user should change
+  mqtt_port: 1883
+  mqtt_user: ""
+  mqtt_password: ""
+  mqtt_discovery_prefix: "homeassistant"
 schema:
-  ping_interval: int
-  speedtest_interval: int
+  ping_interval: int(1,...)
+  speedtest_interval: int(5,...)
   host: str
+  mqtt_host: str
+  mqtt_port: int(1,65535)
+  mqtt_user: str?
+  mqtt_password: password?
+  mqtt_discovery_prefix: str
